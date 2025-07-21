@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,7 +19,7 @@
 		59777A8D2E0D97D500408EC5 /* JSONResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59777A822E0D97D500408EC5 /* JSONResponseView.swift */; };
 		59777A8E2E0D97D500408EC5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59777A812E0D97D500408EC5 /* HomeView.swift */; };
 		59777A8F2E0D97D500408EC5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59777A7F2E0D97D500408EC5 /* ContentView.swift */; };
-		598282D92E2791BF005F5370 /* gr4vy-swift in Frameworks */ = {isa = PBXBuildFile; productRef = 598282D82E2791BF005F5370 /* gr4vy-swift */; };
+		59D1C69B2E2E581400F9CEDE /* gr4vy-swift in Frameworks */ = {isa = PBXBuildFile; productRef = 59D1C69A2E2E581400F9CEDE /* gr4vy-swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				598282D92E2791BF005F5370 /* gr4vy-swift in Frameworks */,
+				59D1C69B2E2E581400F9CEDE /* gr4vy-swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +170,7 @@
 			);
 			mainGroup = 5978B27B271C7F1300F5CC00;
 			packageReferences = (
-				598282D72E2791BF005F5370 /* XCLocalSwiftPackageReference "../Gr4vy-Native-iOS-SDK" */,
+				59D1C6992E2E575600F9CEDE /* XCRemoteSwiftPackageReference "gr4vy-swift" */,
 			);
 			productRefGroup = 5978B286271C7F1300F5CC00 /* Products */;
 			projectDirPath = "";
@@ -421,16 +421,21 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		598282D72E2791BF005F5370 /* XCLocalSwiftPackageReference "../Gr4vy-Native-iOS-SDK" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../Gr4vy-Native-iOS-SDK";
+/* Begin XCRemoteSwiftPackageReference section */
+		59D1C6992E2E575600F9CEDE /* XCRemoteSwiftPackageReference "gr4vy-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gr4vy/gr4vy-swift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		598282D82E2791BF005F5370 /* gr4vy-swift */ = {
+		59D1C69A2E2E581400F9CEDE /* gr4vy-swift */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 59D1C6992E2E575600F9CEDE /* XCRemoteSwiftPackageReference "gr4vy-swift" */;
 			productName = "gr4vy-swift";
 		};
 /* End XCSwiftPackageProductDependency section */

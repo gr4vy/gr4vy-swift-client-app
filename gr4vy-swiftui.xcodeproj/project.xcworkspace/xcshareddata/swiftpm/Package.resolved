@@ -1,0 +1,15 @@
+{
+  "originHash" : "a9eb3f0d0ff8faee170594c591f4342e7c90d2d36770337b3fd500823ee7e1f8",
+  "pins" : [
+    {
+      "identity" : "gr4vy-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gr4vy/gr4vy-swift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "b75bc95738d2fd53386723c711590a269b19f038"
+      }
+    }
+  ],
+  "version" : 3
+}

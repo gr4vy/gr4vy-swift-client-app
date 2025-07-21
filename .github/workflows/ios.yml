@@ -24,6 +24,6 @@ jobs:
           # Build the project with the correct scheme
           xcodebuild build \
             -project gr4vy-swiftui.xcodeproj \
-            -scheme "Gr4vy SwiftUI Sample App" \
+            -scheme "Gr4vy SwiftUI" \
             -destination "platform=iOS Simulator,name=$device" \
             -configuration Debug
