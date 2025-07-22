@@ -1,4 +1,4 @@
-# Gr4vy SwiftUI Reference App for Swift SDK
+# SwiftUI Demo App for Gr4vy Swift SDK
 
 
 <div align="left">
