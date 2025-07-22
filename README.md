@@ -1,5 +1,4 @@
-# SwiftUI Demo App for Gr4vy Swift SDK
-
+# SwiftUI Client App for Gr4vy Swift SDK
 
 <div align="left">
     <img alt="Platforms" src="https://img.shields.io/badge/Platforms-iOS-yellowgreen?style=for-the-badge">
