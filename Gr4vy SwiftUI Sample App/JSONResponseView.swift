@@ -65,10 +65,10 @@ struct JSONResponseView: View {
         JSONResponseView(
             jsonString: """
             {
-                "status": "success",
+                "status": "complete",
                 "data": {
                     "id": "12345",
-                    "message": "Payment processed successfully"
+                    "message": "Payment processed"
                 }
             }
             """,

@@ -18,7 +18,7 @@ struct HomeView: View {
                 }
                 
                 NavigationLink(destination: FieldsView()) {
-                    ButtonView(title: "Fields", systemImage: "textformat")
+                    ButtonView(title: "Tokenize", systemImage: "key.fill")
                 }
                 
                 NavigationLink(destination: CardDetailsView()) {

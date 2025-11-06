@@ -10,6 +10,7 @@
 		592C4BBC28BF9AEE00063AC7 /* Gr4vy_SwiftUI_Sample_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592C4BBB28BF9AEE00063AC7 /* Gr4vy_SwiftUI_Sample_App.swift */; };
 		592C4BC028BF9AEF00063AC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 592C4BBF28BF9AEF00063AC7 /* Assets.xcassets */; };
 		592C4BC328BF9AEF00063AC7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 592C4BC228BF9AEF00063AC7 /* Preview Assets.xcassets */; };
+		5951A47B2E5C32B00032269A /* gr4vy-swift in Frameworks */ = {isa = PBXBuildFile; productRef = 5951A47A2E5C32B00032269A /* gr4vy-swift */; };
 		59777A872E0D97D500408EC5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59777A852E0D97D500408EC5 /* Preview Assets.xcassets */; };
 		59777A882E0D97D500408EC5 /* PaymentOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59777A842E0D97D500408EC5 /* PaymentOptionsView.swift */; };
 		59777A892E0D97D500408EC5 /* CardDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59777A7E2E0D97D500408EC5 /* CardDetailsView.swift */; };
@@ -19,7 +20,7 @@
 		59777A8D2E0D97D500408EC5 /* JSONResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59777A822E0D97D500408EC5 /* JSONResponseView.swift */; };
 		59777A8E2E0D97D500408EC5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59777A812E0D97D500408EC5 /* HomeView.swift */; };
 		59777A8F2E0D97D500408EC5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59777A7F2E0D97D500408EC5 /* ContentView.swift */; };
-		59D1C69B2E2E581400F9CEDE /* gr4vy-swift in Frameworks */ = {isa = PBXBuildFile; productRef = 59D1C69A2E2E581400F9CEDE /* gr4vy-swift */; };
+		59A36A8C2EBCEA4500DF9B9B /* gr4vy-swift in Frameworks */ = {isa = PBXBuildFile; productRef = 59A36A8B2EBCEA4500DF9B9B /* gr4vy-swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,7 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59D1C69B2E2E581400F9CEDE /* gr4vy-swift in Frameworks */,
+				5951A47B2E5C32B00032269A /* gr4vy-swift in Frameworks */,
+				59A36A8C2EBCEA4500DF9B9B /* gr4vy-swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +172,8 @@
 			);
 			mainGroup = 5978B27B271C7F1300F5CC00;
 			packageReferences = (
-				59D1C6992E2E575600F9CEDE /* XCRemoteSwiftPackageReference "gr4vy-swift" */,
+				597CE0A72E636587009BFE35 /* XCRemoteSwiftPackageReference "SPM" */,
+				59A36A8A2EBCEA4500DF9B9B /* XCRemoteSwiftPackageReference "gr4vy-swift" */,
 			);
 			productRefGroup = 5978B286271C7F1300F5CC00 /* Products */;
 			projectDirPath = "";
@@ -222,7 +225,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Gr4vy SwiftUI Sample App/Gr4vy SwiftUI Sample App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Gr4vy SwiftUI Sample App/Preview Content\"";
 				DEVELOPMENT_TEAM = 827JC37NMC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -253,7 +255,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Gr4vy SwiftUI Sample App/Gr4vy SwiftUI Sample App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Gr4vy SwiftUI Sample App/Preview Content\"";
 				DEVELOPMENT_TEAM = 827JC37NMC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -422,7 +423,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		59D1C6992E2E575600F9CEDE /* XCRemoteSwiftPackageReference "gr4vy-swift" */ = {
+		597CE0A72E636587009BFE35 /* XCRemoteSwiftPackageReference "SPM" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ios-3ds-sdk/SPM.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.30;
+			};
+		};
+		59A36A8A2EBCEA4500DF9B9B /* XCRemoteSwiftPackageReference "gr4vy-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gr4vy/gr4vy-swift";
 			requirement = {
@@ -433,9 +442,13 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		59D1C69A2E2E581400F9CEDE /* gr4vy-swift */ = {
+		5951A47A2E5C32B00032269A /* gr4vy-swift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 59D1C6992E2E575600F9CEDE /* XCRemoteSwiftPackageReference "gr4vy-swift" */;
+			productName = "gr4vy-swift";
+		};
+		59A36A8B2EBCEA4500DF9B9B /* gr4vy-swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59A36A8A2EBCEA4500DF9B9B /* XCRemoteSwiftPackageReference "gr4vy-swift" */;
 			productName = "gr4vy-swift";
 		};
 /* End XCSwiftPackageProductDependency section */
