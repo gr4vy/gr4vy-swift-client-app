@@ -247,7 +247,7 @@ struct CardDetailsView: View {
                             self.errorMessage = "Invalid Gr4vy ID: \(gr4vyError.localizedDescription)"
                         case .badURL(let url):
                             self.errorMessage = "Bad URL: \(url)"
-                        case .httpError(let statusCode, let responseData, let message):
+                        case .httpError(let statusCode, let responseData, _):
                             self.errorStatusCode = statusCode
                             self.errorResponseData = responseData
                             
@@ -262,6 +262,10 @@ struct CardDetailsView: View {
                             self.handleNetworkError(urlError, gr4vyID: gr4vyID)
                         case .decodingError(let message):
                             self.errorMessage = "Decoding error: \(message)"
+                        case .threeDSError(let message):
+                            self.errorMessage = "3DS error: \(message)"
+                        case .uiContextError(let message):
+                            self.errorMessage = "UI error: \(message)"
                         }
                     } else {
                         self.handleNetworkError(error, gr4vyID: gr4vyID)
