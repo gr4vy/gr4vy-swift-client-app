@@ -51,6 +51,7 @@
 		59777A832E0D97D500408EC5 /* PaymentMethodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodsView.swift; sourceTree = "<group>"; };
 		59777A842E0D97D500408EC5 /* PaymentOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionsView.swift; sourceTree = "<group>"; };
 		59777A852E0D97D500408EC5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		59D2182B2F111A8A00040778 /* Gr4vy-SwiftUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Gr4vy-SwiftUI-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +106,7 @@
 		5978B27B271C7F1300F5CC00 = {
 			isa = PBXGroup;
 			children = (
+				59D2182B2F111A8A00040778 /* Gr4vy-SwiftUI-Info.plist */,
 				592C4BBA28BF9AEE00063AC7 /* Gr4vy SwiftUI Sample App */,
 				5978B286271C7F1300F5CC00 /* Products */,
 				59FE69712722C131006C1C08 /* Frameworks */,
@@ -228,6 +230,7 @@
 				DEVELOPMENT_TEAM = 827JC37NMC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Gr4vy-SwiftUI-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -258,6 +261,7 @@
 				DEVELOPMENT_TEAM = 827JC37NMC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Gr4vy-SwiftUI-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
