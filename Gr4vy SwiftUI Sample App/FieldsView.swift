@@ -25,6 +25,7 @@ private enum ThemeOption: String, CaseIterable, Identifiable {
     case redBlue
     case orangePurple
     case greenYellow
+    case lightDarkCheck
     var id: String { rawValue }
     var displayName: String {
         switch self {
@@ -32,6 +33,29 @@ private enum ThemeOption: String, CaseIterable, Identifiable {
         case .redBlue: return "Red / Blue"
         case .orangePurple: return "Orange / Purple"
         case .greenYellow: return "Green / Yellow"
+        case .lightDarkCheck: return "Light / Dark Check"
+        }
+    }
+}
+
+// Appearance override, so the light/dark 3DS theme variants can be checked without changing the device setting
+private enum AppearanceOption: String, CaseIterable, Identifiable {
+    case system
+    case light
+    case dark
+    var id: String { rawValue }
+    var displayName: String {
+        switch self {
+        case .system: return "System"
+        case .light: return "Light"
+        case .dark: return "Dark"
+        }
+    }
+    var interfaceStyle: UIUserInterfaceStyle {
+        switch self {
+        case .system: return .unspecified
+        case .light: return .light
+        case .dark: return .dark
         }
     }
 }
@@ -132,6 +156,7 @@ struct FieldsView: View {
     @AppStorage("fields_authenticate") private var authenticate: Bool = true
     @AppStorage("fields_test_card") private var selectedTestCardRaw: String = TestCard.custom.rawValue
     @AppStorage("fields_theme") private var selectedThemeRaw: String = ThemeOption.none.rawValue
+    @AppStorage("fields_appearance") private var selectedAppearanceRaw: String = AppearanceOption.system.rawValue
     @AppStorage("fields_sdk_max_timeout") private var sdkMaxTimeout: String = "300"
     
     private var selectedTestCard: TestCard {
@@ -190,8 +215,21 @@ struct FieldsView: View {
                         }
                     }
                     .pickerStyle(.menu)
+
+                    Picker("Appearance", selection: $selectedAppearanceRaw) {
+                        ForEach(AppearanceOption.allCases) { option in
+                            Text(option.displayName).tag(option.rawValue)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .onChange(of: selectedAppearanceRaw) { _ in
+                        applyAppearance()
+                    }
+                    .onAppear {
+                        applyAppearance()
+                    }
                 }
-                
+
                 Section(header: Text("SDK Settings")) {
                     TextField("SDK Max Timeout (seconds)", text: $sdkMaxTimeout)
                         .keyboardType(.numberPad)
@@ -594,6 +632,15 @@ struct FieldsView: View {
         securityCode = ""
     }
     
+    // Applied at window level so the 3DS challenge presented by the SDK inherits it
+    private func applyAppearance() {
+        let style = (AppearanceOption(rawValue: selectedAppearanceRaw) ?? .system).interfaceStyle
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .forEach { $0.overrideUserInterfaceStyle = style }
+    }
+
     private func uiCustomizationForTheme(_ option: ThemeOption) -> Gr4vyThreeDSUiCustomizationMap? {
         switch option {
         case .none:
@@ -604,6 +651,8 @@ struct FieldsView: View {
             return buildOrangePurpleTheme()
         case .greenYellow:
             return buildGreenYellowTheme()
+        case .lightDarkCheck:
+            return buildLightDarkCheckTheme()
         }
     }
     
@@ -853,6 +902,58 @@ struct FieldsView: View {
                 .openOobApp: .init(textFontSize: 16, textColorHex: "#000000", backgroundColorHex: "#30d158", cornerRadius: 8),
                 .addCardholder: .init(textFontSize: 13, textColorHex: "#000000", backgroundColorHex: "#2e2e2e", cornerRadius: 6),
                 .cancel: .init(textFontSize: 16, textColorHex: "#000000")
+            ]
+        )
+        
+        return Gr4vyThreeDSUiCustomizationMap(default: light, dark: dark)
+    }
+
+    private func buildLightDarkCheckTheme() -> Gr4vyThreeDSUiCustomizationMap {
+        // The header text names the variant in use, so it is obvious which one the 3DS SDK applied
+        let light = Gr4vyThreeDSUiCustomization(
+            label: .init(textColorHex: "#000000", headingTextColorHex: "#000000"),
+            toolbar: .init(
+                textColorHex: "#000000",
+                backgroundColorHex: "#ffd60a",
+                headerText: "LIGHT THEME",
+                buttonText: "Cancel"
+            ),
+            textBox: .init(textColorHex: "#000000", borderWidth: 2, borderColorHex: "#000000", cornerRadius: 8),
+            view: .init(
+                challengeViewBackgroundColorHex: "#ffffff",
+                progressViewBackgroundColorHex: "#ffffff"
+            ),
+            buttons: [
+                .submit: .init(textColorHex: "#000000", backgroundColorHex: "#ffd60a", cornerRadius: 8),
+                .continue: .init(textColorHex: "#000000", backgroundColorHex: "#ffd60a", cornerRadius: 8),
+                .next: .init(textColorHex: "#000000", backgroundColorHex: "#ffd60a", cornerRadius: 8),
+                .resend: .init(textColorHex: "#000000", backgroundColorHex: "#e5e5ea", cornerRadius: 8),
+                .openOobApp: .init(textColorHex: "#000000", backgroundColorHex: "#ffd60a", cornerRadius: 8),
+                .addCardholder: .init(textColorHex: "#000000", backgroundColorHex: "#e5e5ea", cornerRadius: 8),
+                .cancel: .init(textColorHex: "#000000")
+            ]
+        )
+        let dark = Gr4vyThreeDSUiCustomization(
+            label: .init(textColorHex: "#ffffff", headingTextColorHex: "#ffffff"),
+            toolbar: .init(
+                textColorHex: "#ffffff",
+                backgroundColorHex: "#bf5af2",
+                headerText: "DARK THEME",
+                buttonText: "Cancel"
+            ),
+            textBox: .init(textColorHex: "#ffffff", borderWidth: 2, borderColorHex: "#ffffff", cornerRadius: 8),
+            view: .init(
+                challengeViewBackgroundColorHex: "#000000",
+                progressViewBackgroundColorHex: "#000000"
+            ),
+            buttons: [
+                .submit: .init(textColorHex: "#ffffff", backgroundColorHex: "#bf5af2", cornerRadius: 8),
+                .continue: .init(textColorHex: "#ffffff", backgroundColorHex: "#bf5af2", cornerRadius: 8),
+                .next: .init(textColorHex: "#ffffff", backgroundColorHex: "#bf5af2", cornerRadius: 8),
+                .resend: .init(textColorHex: "#ffffff", backgroundColorHex: "#3a3a3c", cornerRadius: 8),
+                .openOobApp: .init(textColorHex: "#ffffff", backgroundColorHex: "#bf5af2", cornerRadius: 8),
+                .addCardholder: .init(textColorHex: "#ffffff", backgroundColorHex: "#3a3a3c", cornerRadius: 8),
+                .cancel: .init(textColorHex: "#ffffff")
             ]
         )
         
