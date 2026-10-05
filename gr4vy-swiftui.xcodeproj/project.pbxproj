@@ -174,7 +174,6 @@
 			);
 			mainGroup = 5978B27B271C7F1300F5CC00;
 			packageReferences = (
-				597CE0A72E636587009BFE35 /* XCRemoteSwiftPackageReference "SPM" */,
 				59A36A8A2EBCEA4500DF9B9B /* XCRemoteSwiftPackageReference "gr4vy-swift" */,
 			);
 			productRefGroup = 5978B286271C7F1300F5CC00 /* Products */;
@@ -427,14 +426,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		597CE0A72E636587009BFE35 /* XCRemoteSwiftPackageReference "SPM" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ios-3ds-sdk/SPM.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.5.30;
-			};
-		};
 		59A36A8A2EBCEA4500DF9B9B /* XCRemoteSwiftPackageReference "gr4vy-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gr4vy/gr4vy-swift";
