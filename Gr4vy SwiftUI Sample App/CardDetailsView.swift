@@ -122,21 +122,24 @@ struct CardDetailsView: View {
         }
         .navigationTitle("Card Details")
         .navigationBarTitleDisplayMode(.large)
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                Button("GET") {
-                    Task {
-                        await sendRequest()
-                    }
+        .safeAreaInset(edge: .bottom) {
+            Button {
+                Task {
+                    await sendRequest()
                 }
-                .frame(maxWidth: .infinity)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .font(.title3)
-                .fontWeight(.bold)
-                .cornerRadius(8)
-                .disabled(currency.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isLoading)
+            } label: {
+                Text("GET")
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
             }
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .font(.title3)
+            .fontWeight(.bold)
+            .cornerRadius(8)
+            .disabled(currency.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isLoading)
+            .padding()
+            .background(.bar)
         }
         .navigationDestination(isPresented: $showingResponse) {
             if let responseData = responseData {

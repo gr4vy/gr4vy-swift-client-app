@@ -157,7 +157,9 @@ struct FieldsView: View {
     @AppStorage("fields_test_card") private var selectedTestCardRaw: String = TestCard.custom.rawValue
     @AppStorage("fields_theme") private var selectedThemeRaw: String = ThemeOption.none.rawValue
     @AppStorage("fields_appearance") private var selectedAppearanceRaw: String = AppearanceOption.system.rawValue
-    @AppStorage("fields_sdk_max_timeout") private var sdkMaxTimeout: String = "300"
+    // Minutes, like the SDK parameter. A new key: the old "fields_sdk_max_timeout" held seconds ("300").
+    @AppStorage("fields_sdk_max_timeout_minutes") private var sdkMaxTimeout: String = "5"
+    @AppStorage("fields_preferred_scheme") private var preferredScheme: String = ""
     
     private var selectedTestCard: TestCard {
         TestCard(rawValue: selectedTestCardRaw) ?? .custom
@@ -231,13 +233,13 @@ struct FieldsView: View {
                 }
 
                 Section(header: Text("SDK Settings")) {
-                    TextField("SDK Max Timeout (seconds)", text: $sdkMaxTimeout)
+                    TextField("SDK Max Timeout (minutes)", text: $sdkMaxTimeout)
                         .keyboardType(.numberPad)
                         .autocorrectionDisabled()
                         .onChange(of: sdkMaxTimeout) { newValue in
-                            // Only allow numeric characters
+                            // Minutes: digits only, max 2 (sent as 5 to 99)
                             let filtered = newValue.filter { $0.isNumber }
-                            sdkMaxTimeout = String(filtered.prefix(5)) // Max 99999 seconds
+                            sdkMaxTimeout = String(filtered.prefix(2))
                         }
                 }
                 
@@ -253,8 +255,19 @@ struct FieldsView: View {
                 }
                 
                 if selectedPaymentMethodType == PaymentMethodType.card.rawValue {
-                    Section(header: Text("Authentication")) {
+                    Section {
                         Toggle("Authenticate", isOn: $authenticate)
+
+                        // Preferred scheme for co-badged cards, sent as ?preferredScheme= on the 3DS version call
+                        TextField("preferred_scheme", text: $preferredScheme)
+                            .textContentType(.none)
+                            .autocorrectionDisabled()
+                            .autocapitalization(.none)
+                            .disabled(!authenticate)
+                    } header: {
+                        Text("Authentication")
+                    } footer: {
+                        Text("Gr4vy scheme ID, e.g. carte-bancaire or visa. Empty for no preference.")
                     }
                     
                     Section(header: Text("Test Cards")) {
@@ -332,30 +345,31 @@ struct FieldsView: View {
         }
         .navigationTitle("Tokenize")
         .navigationBarTitleDisplayMode(.large)
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                Button {
-                    Task {
-                        await sendRequest()
+        .safeAreaInset(edge: .bottom) {
+            Button {
+                Task {
+                    await sendRequest()
+                }
+            } label: {
+                HStack(spacing: 8) {
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            .scaleEffect(0.8)
                     }
-                } label: {
-                    HStack(spacing: 8) {
-                        if isLoading {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                .scaleEffect(0.8)
-                        }
-                        Text(isLoading ? "Sending..." : "PUT")
-                    }
+                    Text(isLoading ? "Sending..." : "PUT")
                 }
                 .frame(maxWidth: .infinity)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .font(.title3)
-                .fontWeight(.bold)
-                .cornerRadius(8)
-                .disabled(isLoading)
+                .padding(.vertical, 12)
             }
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .font(.title3)
+            .fontWeight(.bold)
+            .cornerRadius(8)
+            .disabled(isLoading)
+            .padding()
+            .background(.bar)
         }
         .navigationDestination(isPresented: $showingResponse) {
             if let responseData = responseData {
@@ -456,16 +470,17 @@ struct FieldsView: View {
             return
         }
         
-        // Convert seconds to minutes for the SDK parameter
-        let timeoutSeconds = Int(sdkMaxTimeout.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 300
-        let timeoutMinutes = timeoutSeconds / 60
-        
+        // Minutes, like the SDK parameter; the 3DS SDK accepts 5 to 99
+        let timeoutMinutes = min(max(Int(sdkMaxTimeout.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 5, 5), 99)
+        let trimmedPreferredScheme = preferredScheme.trimmingCharacters(in: .whitespacesAndNewlines)
+
         gr4vy.tokenize(
             checkoutSessionId: checkoutSessionId.trimmingCharacters(in: .whitespacesAndNewlines),
             cardData: cardData,
             sdkMaxTimeoutMinutes: timeoutMinutes,
             authenticate: authenticate,
-            uiCustomization: uiCustomizationForTheme(selectedTheme)
+            uiCustomization: uiCustomizationForTheme(selectedTheme),
+            preferredScheme: trimmedPreferredScheme.isEmpty ? nil : trimmedPreferredScheme
         ) { result in
             Task { @MainActor in
                 isLoading = false

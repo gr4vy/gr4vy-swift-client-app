@@ -7,7 +7,7 @@
       "location" : "https://github.com/gr4vy/gr4vy-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "9d5e4b88585e14c8e073c61d6bfcc1b7e3b54bd4"
+        "revision" : "edfe06bdddd6fe937c767ad673cf9bdfc0848a0f"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/netceteragroup/ios-3ds-sdk-spm.git",
       "state" : {
-        "revision" : "e2fe4a1430d3d3185ea7c84b87a0cfdefbe3e077",
-        "version" : "2.7.0"
+        "revision" : "c831f660e84b2f4f09a728534f1764c5e7b78994",
+        "version" : "2.7.1"
       }
     }
   ],
